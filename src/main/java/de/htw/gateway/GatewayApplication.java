@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,16 @@ public class GatewayApplication {
                         .path("/products/**")
                         .filters(f -> f.prefixPath("/v1"))
                         .uri("http://product-service:8080"))
+                .route("basket-service", r -> r
+                        .path("/baskets/**")
+                        .and()
+                        .method(HttpMethod.GET)
+                        .and()
+                        .method(HttpMethod.DELETE)
+                        .filters(f -> f.prefixPath("/v1"))
+                        .uri("http://basket-service:8080"))
                 .build();
+
     }
 
     @GetMapping("/hello")

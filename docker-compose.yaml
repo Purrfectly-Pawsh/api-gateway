@@ -10,4 +10,5 @@ services:
 
 networks:
   service-nw:
+    name: service-nw
     external: true

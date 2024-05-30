@@ -5,8 +5,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
+    networks:
+        - service-nw
 
 networks:
-  default:
+  service-nw:
     external: true
-    name: service-nw

@@ -19,6 +19,7 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
+    /*
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
@@ -28,9 +29,21 @@ public class GatewayApplication {
                         .uri("http://product-service:8080"))
                 .build();
     }
+     */
 
-    @GetMapping("/hello")
-    public @ResponseBody String hello() {
-        return "Hello";
+    @GetMapping("/open")
+    public @ResponseBody String open() {
+        return "unsecured: anyone can access";
     }
+
+    @GetMapping("/user")
+    public @ResponseBody String user() {
+        return "secured: user and admin only";
+    }
+
+    @GetMapping("/admin")
+    public @ResponseBody String admin() {
+        return "secured: admin only";
+    }
+
 }

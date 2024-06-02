@@ -5,13 +5,18 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer_uri: http://localhost:8083/auth/realms/SA24
-          jwk-set-uri: http://localhost:8083/auth/realms/SA24/protocol/openid-connect/certs
+          issuer_uri: http://localhost:8083/realms/SA24
+          jwk-set-uri: http://localhost:8083/realms/SA24/protocol/openid-connect/certs
   main:
     web-application-type: reactive
     allow-bean-definition-overriding: true
+
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+logging:
+  level:
+    org.springframework.security: DEBUG

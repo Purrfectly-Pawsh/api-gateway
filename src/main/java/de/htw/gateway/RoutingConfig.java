@@ -23,7 +23,7 @@ public class RoutingConfig {
                 .route("basket-service", r -> r
                         .path("/baskets/**")
                         .and()
-                        .method(HttpMethod.GET)
+                        .method("GET", "DELETE")
                         .filters(f -> f.prefixPath("/v1"))
                         .uri("http://basket-service:8080"))
                 .build();

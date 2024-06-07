@@ -1,15 +1,15 @@
 spring:
   application:
     name: gateway
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer_uri: http://localhost:8083/realms/SA24
-          jwk-set-uri: http://localhost:8083/realms/SA24/protocol/openid-connect/certs
-  main:
-    web-application-type: reactive
-    allow-bean-definition-overriding: true
+          issuer-uri: http://localhost:8083/realms/SA24
+          jwk-set-uri: http://keycloak:8080/realms/SA24/protocol/openid-connect/certs
 
 management:
   endpoints:
@@ -20,3 +20,9 @@ management:
 logging:
   level:
     org.springframework.security: DEBUG
+
+jwt:
+  auth:
+    converter:
+      principal-attribute: preferred_username
+      resource-id: purrfectly_pawsh

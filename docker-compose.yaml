@@ -1,4 +1,14 @@
 services:
+  gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+        - service-nw
+    depends_on:
+      - keycloak
 
   keycloak:
     image: quay.io/keycloak/keycloak:23.0.7
@@ -6,23 +16,12 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
-      - 8083:8080
+      - "8083:8080"
     volumes:
       - ./keycloak-config/:/opt/keycloak/data/import:ro
     entrypoint: '/opt/keycloak/bin/kc.sh start-dev --import-realm'
     networks:
       - service-nw
-
-  gateway:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - keycloak
-    networks:
-        - service-nw
 
 networks:
   service-nw:

@@ -26,35 +26,20 @@ public class JwtAuthConverter implements Converter<Jwt, Collection<GrantedAuthor
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
 
-        System.out.println("#########################################################################################");
-        System.out.println();
-        System.out.println();
-        System.out.println("#########################################################################################");
-        System.out.println("JWT");
-        System.out.println(jwt.getClaims());
-        System.out.println(jwt.getHeaders());
-
         Collection<GrantedAuthority> authorities = Stream.concat(
                 JWT_GRANTED_AUTHORITIES_CONVERTER.convert(jwt).stream(),
                 extractResourceRoles(jwt).stream()
                 )
                 .collect(Collectors.toSet());
 
-        System.out.println("#########################################################################################");
-        System.out.println("AUTHORITIES");
-        System.out.println(authorities);
-
         return authorities;
+
     }
 
     private Collection<? extends GrantedAuthority> extractResourceRoles(Jwt jwt) {
         Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
         Map<String, Object> resource ;
         Collection<String> resourceRoles;
-
-        System.out.println("#########################################################################################");
-        System.out.println("RESOURCE ACCESS");
-        System.out.println(resourceAccess);
 
         if (resourceAccess == null
                 || (resource = (Map<String, Object>) resourceAccess.get(properties.getResourceId())) == null
@@ -65,6 +50,7 @@ public class JwtAuthConverter implements Converter<Jwt, Collection<GrantedAuthor
         return resourceRoles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .collect(Collectors.toSet());
+
     }
 
 }

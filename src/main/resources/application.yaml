@@ -6,3 +6,15 @@ management:
     web:
       exposure:
         include: "*"
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /product-service-doc/v3/api-docs
+        name: Product Service
+        primaryName: Product Service

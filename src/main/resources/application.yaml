@@ -37,4 +37,3 @@ springdoc:
     urls:
       - url: /product-service-doc/v3/api-docs
         name: Product Service
-        primaryName: Product Service

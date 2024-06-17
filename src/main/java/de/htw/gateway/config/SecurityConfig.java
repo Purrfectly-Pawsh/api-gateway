@@ -25,25 +25,28 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) throws Exception {
 
         http
-            .cors(cors -> cors.configurationSource(request -> {
-                CorsConfiguration configuration = new CorsConfiguration();
-                configuration.setAllowedOrigins(List.of("*"));
-                configuration.setAllowedMethods(List.of("*"));
-                configuration.setAllowedHeaders(List.of("*"));
-                return configuration;
-            }))
-            .csrf(csrfSpec -> csrfSpec.disable())
-            .authorizeExchange(authorize -> authorize
-                    .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
-                    .pathMatchers("/baskets/**").permitAll()
-                    .pathMatchers("/open").permitAll()
-                    .pathMatchers("/user").hasRole("USER")
-                    .pathMatchers("/admin").hasRole("ADMIN")
-                    .anyExchange().denyAll()
-            )
-            .oauth2ResourceServer(oauth2 -> oauth2
-                            .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
-            );
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration configuration = new CorsConfiguration();
+                    configuration.setAllowedOrigins(List.of("*"));
+                    configuration.setAllowedMethods(List.of("*"));
+                    configuration.setAllowedHeaders(List.of("*"));
+                    return configuration;
+                }))
+                .csrf(csrfSpec -> csrfSpec.disable())
+                .authorizeExchange(authorize -> authorize
+                        .pathMatchers("/product-service-doc/**").permitAll()
+                        .pathMatchers("/swagger-ui.html").permitAll()
+                        .pathMatchers("/webjars/**").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
+                        .pathMatchers("/baskets/**").permitAll()
+                        .pathMatchers("/open").permitAll()
+                        .pathMatchers("/user").hasRole("USER")
+                        .pathMatchers("/admin").hasRole("ADMIN")
+                        .anyExchange().denyAll()
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                );
 
         return http.build();
     }

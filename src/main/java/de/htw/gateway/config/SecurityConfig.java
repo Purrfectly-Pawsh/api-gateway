@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .pathMatchers("/product-service-doc/**").permitAll()
                         .pathMatchers("/swagger-ui.html").permitAll()
                         .pathMatchers("/webjars/**").permitAll()
+                        .pathMatchers("/v3/api-docs/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
                         .pathMatchers("/baskets/**").permitAll()
                         .pathMatchers("/open").permitAll()

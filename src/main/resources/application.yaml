@@ -16,7 +16,6 @@ management:
     web:
       exposure:
         include: "*"
-
 logging:
   level:
     org.springframework.security: DEBUG
@@ -26,3 +25,15 @@ jwt:
     converter:
       principal-attribute: preferred_username
       resource-id: purrfectly_pawsh
+
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /product-service-doc/v3/api-docs
+        name: Product Service

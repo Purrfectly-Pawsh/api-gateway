@@ -15,19 +15,5 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-    @GetMapping("/open")
-    public @ResponseBody String open() {
-        return "unsecured: anyone can access";
-    }
-
-    @GetMapping("/user")
-    public @ResponseBody String user() {
-        return "secured: user and admin only";
-    }
-
-    @GetMapping("/admin")
-    public @ResponseBody String admin() {
-        return "secured: admin only";
-    }
 }
 

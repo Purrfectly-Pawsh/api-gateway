@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .pathMatchers("/v3/api-docs/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
                         .pathMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
+                        .pathMatchers(HttpMethod.POST, "/products/{id}/reviews").hasRole("USER")
                         .pathMatchers("/baskets/**").permitAll()
                         .pathMatchers("/open").permitAll()
                         .pathMatchers("/user").hasRole("USER")

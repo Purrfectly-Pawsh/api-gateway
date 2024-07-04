@@ -39,11 +39,9 @@ public class SecurityConfig {
                         .pathMatchers("/webjars/**").permitAll()
                         .pathMatchers("/v3/api-docs/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
+                        .pathMatchers(HttpMethod.PUT, "baskets/*").hasRole("USER")
                         .pathMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                         .pathMatchers("/baskets/**").permitAll()
-                        .pathMatchers("/open").permitAll()
-                        .pathMatchers("/user").hasRole("USER")
-                        .pathMatchers("/admin").hasRole("ADMIN")
                         .anyExchange().denyAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

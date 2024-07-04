@@ -32,7 +32,7 @@ public class SecurityConfig {
                     configuration.setAllowedHeaders(List.of("*"));
                     return configuration;
                 }))
-                .csrf(csrfSpec -> csrfSpec.disable())
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(authorize -> authorize
                         .pathMatchers("/product-service-doc/**").permitAll()
                         .pathMatchers("/swagger-ui.html").permitAll()
@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .pathMatchers("/v3/api-docs/**").permitAll()
                         .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
                         .pathMatchers(HttpMethod.PUT, "baskets/*").hasRole("USER")
+                        .pathMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                         .pathMatchers("/baskets/**").permitAll()
                         .anyExchange().denyAll()
                 )

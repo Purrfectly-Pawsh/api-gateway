@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .pathMatchers("/open").permitAll()
                         .pathMatchers("/user").hasRole("USER")
                         .pathMatchers("/admin").hasRole("ADMIN")
+                        .pathMatchers("/orders/**").hasRole("USER")
                         .anyExchange().denyAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

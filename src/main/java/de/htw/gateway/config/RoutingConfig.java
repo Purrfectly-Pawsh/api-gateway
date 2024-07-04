@@ -30,6 +30,10 @@ public class RoutingConfig {
                         .method("GET", "DELETE", "PUT")
                         .filters(f -> f.prefixPath("/v1"))
                         .uri("http://basket-service:8080"))
+                .route("order-service", r -> r
+                        .path("/orders/**")
+                        .filters(f -> f.prefixPath("/v1"))
+                        .uri("http://order-service:8080"))
                 .build();
     }
 }

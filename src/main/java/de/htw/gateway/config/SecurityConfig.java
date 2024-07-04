@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .pathMatchers(HttpMethod.GET, "/products/**").permitAll()
                         .pathMatchers(HttpMethod.PUT, "baskets/*").hasRole("USER")
                         .pathMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
+                        .pathMatchers(HttpMethod.PUT, "/products").hasRole("ADMIN")
                         .pathMatchers("/baskets/**").permitAll()
                         .anyExchange().denyAll()
                 )
